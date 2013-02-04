@@ -25,3 +25,7 @@
 	<hr id="gray"/>
 	
 	<h1>Hello Nichelle!</h1>
+	<p>What would you like to do?</p>
+	<ul>
+		<li>Edit Web Pages</li>
+	</ul>
