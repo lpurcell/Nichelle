@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AuthTest</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <%= javascript_include_tag "MenuMatic_0.68.3" %>
+
+
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+
+  <%= stylesheet_link_tag    "MenuMatic", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+
+  <%= csrf_meta_tags %>
+
+
+  <script>
+      $(document).ready(function(){
+          $('#myMenuButton').menu({
+              content: $('#myContent').html(),
+              maxHeight: 180,
+              positionOpts: { offsetX: 10, offsetY: 20 },
+              showSpeed: 300
+          });
+      });
+  </script>
+
+</head>
+
+<body>
+<div class="page">
+  <div class="side_header">
+    <h1>Photography Niche</h1>
+    <p>by Nichelle Bailey</p>
+  </div>
+
+  <div id="nav">
+    <ul>
+      <li>
+        <a href="#" class="clicker">Portfolio</a>
+        <ul>
+          <li><a href="#">Milestones</a></li>
+          <li><a href="#">Portraits</a></li>
+          <li><a href="#">Together</a></li>
+          <li><a href="#">Little Ones</a></li>
+          <li><a href="#">Beginnings</a></li>
+          <li><a href="#">Expecting</a></li>
+        </ul>
+      </li>
+      </li>
+
+      <li>
+        <a href="#" class="clicker">Weddings and Engagements</a>
+        <ul>
+          <li><a href="#">Celebrate</a></li>
+          <li><a href="#">I Do</a></li>
+          <li><a href="#">Anticipation</a></li>
+          <li><a href="#">Engagements</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#" class="clicker">Information</a>
+        <ul>
+          <li><a href="#">Investment</a></li>
+          <li><a href="#">Offerings</a></li>
+          <li><a href="#">The Artist</a></li>
+        </ul>
+      </li>
+
+      <% if current_user && current_user.role == "1" %>
+          <li><%= link_to "Register People", sign_up_path %></li>
+          <li><%= link_to "List of Users", list_users_path%></li>
+          <li><%= link_to "Log out", log_out_path %></li>
+      <% elsif current_user && current_user.role == "2" %>
+          Logged in as <%= current_user.username %>.
+          <li><%= link_to "Contact Me", contact_me_path %></li>
+          <li><%= link_to "Log out", log_out_path %></li>
+      <% else %>
+          <li><%= link_to "Contact Me", contact_me_path %></li>
+          <li><%= link_to "Events", log_in_path %></li>
+      <% end %>
+
+    </ul>
+
+    <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+  </div>
+
+
+
+  <%= yield %>
+
+
+
+</div>
+
+
+</body>
+</html>
