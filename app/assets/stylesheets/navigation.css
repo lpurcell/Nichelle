@@ -1,74 +1,78 @@
 /*Adjusting the margins, paddings and no list styles*/
 #navigation {
-    margin-top:5px;
-    padding:0;
-    list-style:none;
+    margin-top: 5px;
+    padding: 0;
+    list-style: none;
 }
 
 /*Little tricking with positions*/
 #navigation li {
-    float:left; /*Show list items inline*/
-    width:150px;
+    float: left; /*Show list items inline*/
+    width: 150px;
 
-    position:relative;
+    position: relative;
 }
 
 /*Playing with main categories*/
 #navigation li a {
     /*background:#e3e0ce; */
-    color:#626655;
-    font-weight:bold;
-    display:block; /*Making sure a element covers the whole li area*/
-    padding:8px 7px 8px 7px;
-    text-decoration:none; /*No underline*/
-    border-radius:5px;
-    text-align:center;
-    margin-left:25px;
-    height:40px;
+    color: #626655;
+    font-weight: bold;
+    display: block; /*Making sure a element covers the whole li area*/
+    padding: 8px 7px 8px 7px;
+    text-decoration: none; /*No underline*/
+    border-radius: 5px;
+    text-align: center;
+    margin-left: 25px;
+    height: 40px;
 
 }
+
 #navigation li a:hover {
-    background:#97a662;
-    color:#dd5979;
+    background: #97a662;
+    color: #dd5979;
 }
 
 #navigation > li.selected  > a {
-    background-color:#acbd70;
-    color:#dd5979;
+    background-color: #acbd70;
+    color: #dd5979;
 }
+
 /*sub menu style */
 #navigation li div div {
-    position:absolute;
-    display:none;  /*Hide it by default*/
-    z-index:50;
+    position: absolute;
+    display: none; /*Hide it by default*/
+    z-index: 50;
 }
-#navigation div div ul{
-    width:150px;
-    float:left;
-    left:0;
-    margin:0 0 0 -1px;
-    padding:0;
-    border-top:none;
-    list-style:none;
+
+#navigation div div ul {
+    width: 150px;
+    float: left;
+    left: 0;
+    margin: 0 0 0 -1px;
+    padding: 0;
+    border-top: none;
+    list-style: none;
 }
+
 #navigation div div ul li {
-    width:150px;
-    float:left;
-    border-top:none;
+    width: 150px;
+    float: left;
+    border-top: none;
 
 }
 
 /*Sub Cat menu link properties*/
 #navigation ul a {
-    display:block; /*Making sure an element covers whole li area */
-    height:15px;
-    padding:8px 7px 13px 7px;
-    margin-top:3px;
-    color:#fff;
-    background:#acbd70;
-    text-decoration:none;
-    }
+    display: block; /*Making sure an element covers whole li area */
+    height: 15px;
+    padding: 8px 7px 13px 7px;
+    margin-top: 3px;
+    color: #fff;
+    background: #acbd70;
+    text-decoration: none;
+}
 
 #navigation ul a:hover {
-    color:#dd5979;
+    color: #dd5979;
 }
