@@ -81,21 +81,14 @@ body{
 }
 
 /*slideshow*/
-.banner {
-    position: relative;
-    overflow: auto;
-
-    z-index:10;
-
-    }
-.banner li {
-   list-style: none;
+.nivo-slider {
+    width: 640px;
+    height: 480px;
 }
-.banner ul li {
-    min-width:100%;
-    min-height:100%;
-    width:120%;
-    float: left; }
+div.nivoSlider img{
+    width: 640px;
+    height: 480px;
+}
 
 /*drop down nav*/
 
