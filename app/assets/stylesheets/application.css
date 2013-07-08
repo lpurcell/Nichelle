@@ -65,29 +65,21 @@ body{
     float:right;
 
 }
-.menu{
-    /*float:justified;*/
-
-}
-.menu ul{
-    padding-left:20%;
-
-}
-.menu li{
-    font-weight:bold;
-    list-style: none;
-    display:inline;
-    margin-right:3%;
-}
 
 /*slideshow*/
-.nivo-slider {
-    width: 640px;
-    height: 480px;
+.slider_float {
+    width: 810px;
+    height: 610px;
+    float:right;
+    margin-top:10px;
+    padding-top:10px;
+    padding-left:10px;
+    border-left:thick solid #97a662;
 }
-div.nivoSlider img{
-    width: 640px;
-    height: 480px;
+
+.slider_float img{
+    width: 800px;
+    height: 600px;
 }
 
 /*drop down nav*/

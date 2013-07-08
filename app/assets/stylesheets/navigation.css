@@ -1,6 +1,6 @@
 /*Adjusting the margins, paddings and no list styles*/
 #navigation {
-    margin-top:5px;
+    margin-top:10px;
     padding:0;
     list-style:none;
 }
@@ -8,8 +8,7 @@
 /*Little tricking with positions*/
 #navigation li {
     float:left; /*Show list items inline*/
-    width:150px;
-
+    width:165px;
     position:relative;
 }
 
@@ -23,7 +22,7 @@
     text-decoration:none; /*No underline*/
     border-radius:5px;
     text-align:center;
-    margin-left:25px;
+    margin-left:40px;
     height:40px;
 
 }
@@ -43,7 +42,6 @@
     z-index:50;
 }
 #navigation div div ul{
-    width:150px;
     float:left;
     left:0;
     margin:0 0 0 -1px;
@@ -52,7 +50,7 @@
     list-style:none;
 }
 #navigation div div ul li {
-    width:150px;
+    width:165px;
     float:left;
     border-top:none;
 
