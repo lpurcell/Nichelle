@@ -1,136 +1,151 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AuthTest</title>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <title>Photography Niche</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-  <%= javascript_include_tag "unslider.min" %>
+  <%= javascript_include_tag "jquery.easing.1.2" %>
+  <%= javascript_include_tag "swfobject" %>
+  <%= stylesheet_link_tag    "anythingslider", :media => "all" %>
+  <%= javascript_include_tag "jquery.anythingslider" %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+
+  <%= stylesheet_link_tag    "navigation", :media => "all" %>
   <%= javascript_include_tag "application" %>
+
   <%= csrf_meta_tags %>
 
   <!--Slide show-->
   <script>
-      $(function() {
-          $('.banner').unslider();
+      $.noConflict();
+      jQuery(document).ready(function () {
+          $("#navigation > li > a").click(function (e) { // binding onclick
+                  if ($(this).parent().hasClass('selected')) {
+                    $("#navigation .selected div div").fadeOut(); // hiding popups
+                    $("#navigation .selected").removeClass("selected");
+                  } else {
+                    $("#navigation .selected div div").fadeOut(); // hiding popups
+                    $("#navigation .selected").removeClass("selected");
 
-          var unslider = $('.banner').unslider();
-
-          $('.unslider-arrow').click(function() {
-              var fn = this.className.split(' ')[1];
-
-              //  Either do unslider.data('unslider').next() or .prev() depending on the className
-              unslider.data('unslider')[fn]();
+                    if ($(this).next(".subs").length) {
+                      $(this).parent().addClass("selected"); // display popup
+                      $(this).next(".subs").children().slideDown(1000, function(){});
+                    }
+                  }
+                  e.stopPropagation();
+                  e.preventDefault();
           });
+
+          $("html").click(function () { // binding onclick to body
+             $("#navigation .selected div div").fadeOut(); // hiding popups
+             $("#navigation .selected").removeClass("selected");
+
+          });
+
+          $('#slider').anythingSlider({
+                  autoPlay:true,
+                  resizeContents:false,
+                  buildStartStop:false,
+                  buildNavigation:false,
+                  easing:"swing"
+
       });
+      });
+
   </script>
 
-  <!--Navigation-->
-  <script>
-      $(function () {
-          $('.click-nav > ul').toggleClass('no-js js');
-          $('.click-nav .js ul').hide();
-          $('.click-nav .js').click(function(e) {
-              $('.click-nav .js ul').slideToggle(200);
-              $('.clicker').toggleClass('active');
-              e.stopPropagation();
-          });
-          $(document).click(function() {
-              if ($('.click-nav .js ul').is(':visible')) {
-                  $('.click-nav .js ul', this).slideUp();
-                  $('.clicker').removeClass('active');
-              }
-          });
-      });
-
-  </script>
 </head>
 
 <body>
+
 <div class="page">
-<div class="menu">
-<div class="click-nav">
-  <ul class="no-js">
-    <li>
-      <a href="#" class="clicker">Portfolio</a>
-      <ul>
-        <li><a href="#">Milestones</a></li>
-        <li><a href="#">Portraits</a></li>
-        <li><a href="#">Together</a></li>
-        <li><a href="#">Little Ones</a></li>
-        <li><a href="#">Beginnings</a></li>
-        <li><a href="#">Expecting</a></li>
-      </ul>
-    </li>
-  </ul>
+    <div class="side_header">
+      <h1>Photography Niche</h1>
+      <p>by Nichelle Bailey</p>
+    </div>
+
+      <ul id="navigation">
+          <li>
+            <a href="#">Portfolio</a>
+             <div class="subs">
+               <div>
+                 <ul>
+                    <li><a href="#" class="clicker">Milestones</a></li>
+                    <li><a href="#" class="clicker">Portraits</a></li>
+                    <li><a href="#" class="clicker">Together</a></li>
+                    <li><a href="#" class="clicker">Little Ones</a></li>
+                    <li><a href="#" class="clicker">Beginnings</a></li>
+                    <li><a href="#" class="clicker">Expecting</a></li>
+                  </ul>
+                 </div>
+               </div>
+            <div class="clear"></div>
+          </li>
+
+        <li>
+          <a href="#">Weddings and Engagements</a>
+            <div class="subs">
+              <div>
+                  <ul>
+                    <li><a href="#">Celebrate</a></li>
+                    <li><a href="#">I Do</a></li>
+                    <li><a href="#">Anticipation</a></li>
+                    <li><a href="#">Engagements</a></li>
+                  </ul>
+                </div>
+              </div>
+          <div class="clear"></div>
+        </li>
+
+        <li>
+          <a href="#">Information</a>
+          <div class="subs">
+            <div>
+              <ul>
+                <li><a href="#">Investment</a></li>
+                <li><a href="#">Offerings</a></li>
+                <li><a href="#">The Artist</a></li>
+               </ul>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </li>
+
+        <div class="no_drop_down">
+        <% if current_user && current_user.role == "1" %>
+            <div class=logged_in_message>
+                <li>Logged in as <%= current_user.username %>.</li>
+                <li><%= link_to "Register People", sign_up_path %></li>
+                <li><%= link_to "List of Clients", list_users_path%></li>
+                <li><%= link_to "Log out", log_out_path %></li>
+            </div>
+        <% elsif current_user && current_user.role == "2" %>
+            <li><%= link_to "Contact Me", contact_me_path %></li>
+            <li><%= link_to "Log out", log_out_path %></li>
+                <div class="logged_in_message">
+                    Logged in as <%= current_user.username %>.
+                </div>
+        <% else %>
+            <li><%= link_to "Contact Me", contact_me_path %></li>
+            <li><%= link_to "Events", log_in_path %></li>
+        <% end %>
+
+        </div>
+
+      <div class="clear"></div>
+
+    </ul>
+    <div class="logged_in_message">
+    <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+    </div>
+
+  <%= yield %>
+
 </div>
 
-<!--<div class="click-nav">
-  <ul class="no-js">
-    <li>
-      <a href="#" class="clicker">Weddings and Engagements</a>
-      <ul>
-        <li><a href="#">Celebrate</a></li>
-        <li><a href="#">I Do</a></li>
-        <li><a href="#">Anticipation</a></li>
-        <li><a href="#">Engagements</a></li>
-      </ul>
-    </li>
-  </ul>
-</div>
-
-<div class="click-nav">
-  <ul class="no-js">
-    <li>
-      <a href="#" class="clicker">Information</a>
-      <ul>
-        <li><a href="#">Investment</a></li>
-        <li><a href="#">Offerings</a></li>
-        <li><a href="#">The Artist</a></li>
-       </ul>
-    </li>
-  </ul>
-</div> -->
-     <ul>kitties</ul>
-<% if current_user && current_user.role == "1" %>
-    <%= link_to "Register People", sign_up_path %>
-    <%= link_to "List of Users", list_users_path%>
-    <%= link_to "Log out", log_out_path %>
-<% elsif current_user && current_user.role == "2" %>
-    Logged in as <%= current_user.username %>.
-    <%= link_to "Contact Me", contact_me_path %>
-    <%= link_to "Log out", log_out_path %>
-<% else %>
-    <%= link_to "Contact Me", contact_me_path %>
-    <%= link_to "log in", log_in_path %>
-<% end %>
 
 
-<% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>
-</div>
-  <hr id="gray2"/>
-
-<%= yield %>
-
-<a href="#" class="unslider-arrow prev">Previous slide</a>
- <div class='banner'>
-
-   <ul>
-
-    <li><img src="/assets/rails.png" alt="photo1 title"></li>
-
-    <li><img src="/assets/cave.jpg" alt="photo2 title"></li>
-
-    <li><img src="/assets/fruits.jpg" alt="photo3 title"></li>
-
-    <li> <img src="/assets/pool.jpg" alt="photo4 title"></li>
-   </ul>
-
- </div>
-<a href="#" class="unslider-arrow next">Next slide</a>
-
-</div>
 </body>
 </html>

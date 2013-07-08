@@ -1,63 +1,141 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AuthTest</title>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <%= stylesheet_link_tag "photobox", :media => "all" %>
-  <%= javascript_include_tag "photobox" %>
+  <title>Photography Niche</title>
 
-  <%= javascript_include_tag "jquery.maskedinput-1.2.2.min" %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "navigation", :media => "all" %>
   <%= javascript_include_tag "application" %>
 
-
   <%= csrf_meta_tags %>
+
+  <!--Slide show-->
+  <script>
+      $.noConflict();
+      jQuery(document).ready(function () {
+          $("#navigation > li > a").click(function (e) { // binding onclick
+              if ($(this).parent().hasClass('selected')) {
+                  $("#navigation .selected div div").fadeOut(); // hiding popups
+                  $("#navigation .selected").removeClass("selected");
+              } else {
+                  $("#navigation .selected div div").fadeOut(); // hiding popups
+                  $("#navigation .selected").removeClass("selected");
+
+                  if ($(this).next(".subs").length) {
+                      $(this).parent().addClass("selected"); // display popup
+                      $(this).next(".subs").children().slideDown(1000, function(){});
+                  }
+              }
+              e.stopPropagation();
+              e.preventDefault();
+          });
+
+          $("html").click(function () { // binding onclick to body
+              $("#navigation .selected div div").fadeOut(); // hiding popups
+              $("#navigation .selected").removeClass("selected");
+
+          });
+
+      });
+
+  </script>
+
 </head>
+
 <body>
-<% if current_user && current_user.role == "1" %>
-    <%= link_to "Register People", sign_up_path %>
-    <%= link_to "List of Users", list_users_path%>
-    <%= link_to "Log out", log_out_path %>
-<% elsif current_user && current_user.role == "2" %>
-    Logged in as <%= current_user.username %>.
-    <%= link_to "Contact Me", contact_me_path %>
-    <%= link_to "Log out", log_out_path %>
-<% else %>
-     <%= link_to "Contact Me", contact_me_path %>
-     <%= link_to "log in", log_in_path %>
-<% end %>
+
+<div class="page">
+  <div class="side_header">
+    <h1>Photography Niche</h1>
+    <p>by Nichelle Bailey</p>
+  </div>
+
+  <ul id="navigation">
+    <li>
+      <a href="#">Portfolio</a>
+      <div class="subs">
+        <div>
+          <ul>
+            <li><a href="#" class="clicker">Milestones</a></li>
+            <li><a href="#" class="clicker">Portraits</a></li>
+            <li><a href="#" class="clicker">Together</a></li>
+            <li><a href="#" class="clicker">Little Ones</a></li>
+            <li><a href="#" class="clicker">Beginnings</a></li>
+            <li><a href="#" class="clicker">Expecting</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </li>
+
+    <li>
+      <a href="#">Weddings and Engagements</a>
+      <div class="subs">
+        <div>
+          <ul>
+            <li><a href="#">Celebrate</a></li>
+            <li><a href="#">I Do</a></li>
+            <li><a href="#">Anticipation</a></li>
+            <li><a href="#">Engagements</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </li>
+
+    <li>
+      <a href="#">Information</a>
+      <div class="subs">
+        <div>
+          <ul>
+            <li><a href="#">Investment</a></li>
+            <li><a href="#">Offerings</a></li>
+            <li><a href="#">The Artist</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </li>
+
+    <div class="no_drop_down">
+    <% if current_user && current_user.role == "1" %>
+        <div class="logged_in_message">
+          <li>Logged in as <%= current_user.username %>.</li>
+            <li><%= link_to "Register People", sign_up_path %></li>
+            <li><%= link_to "List of Users", list_users_path%></li>
+            <li><%= link_to "Log out", log_out_path %></li>
+        </div>
+    <% elsif current_user && current_user.role == "2" %>
+        <li><%= link_to "Contact Me", contact_me_path %></li>
+        <li><%= link_to "Log out", log_out_path %></li>
+          <div class="logged_in_message">
+          Logged in as <%= current_user.username %>.
+          </div>
+    <% else %>
+        <li><%= link_to "Contact Me", contact_me_path %></li>
+        <li><%= link_to "Events", log_in_path %></li>
+    <% end %>
+    </div>
 
 
-<% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>
 
-<%= yield %>
+  </ul>
 
-<div id='gallery'>
-  <a href="http://localhost:3000/assets/rails.png">
-    <img src="/assets/rails.png" alt="photo1 title">
-  </a>
-  <a href="http://localhost:3000/assets/cave.jpg">
-    <img src="/assets/cave.jpg" alt="photo2 title">
-  </a>
-  <a href="http://localhost:3000/assets/fruits.jpg">
-    <img src="/assets/fruits.jpg" alt="photo3 title">
-  </a>
-  <a href="http://localhost:3000/assets/pool.jpg">
-    <img src="/assets/pool.jpg" alt="photo4 title">
-  </a>
+    <div class="logged_in_message">
+       <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end %>
+      </div>
+
+
+    <%= yield %>
+
+
 </div>
 
-<script>
-    $('#gallery').photobox('a');
-    // or with a fancier selector and some settings, and a callback:
-    $('#gallery').photobox('a:first', { thumbs:false, time:0 }, imageLoaded);
-    function imageLoaded(){
-        console.log('image has been loaded...');
-    }
-</script>
+
 
 </body>
 </html>

@@ -1,4 +1,5 @@
-<h1>Sign up!</h1>
+<div class="new_client">
+<h1>Register a New Client</h1>
 
 <%= form_for @user do |f| %>
     <% if @user.errors.any? %>
@@ -12,32 +13,33 @@
         </div>
     <% end %>
     <p>
-      <%= f.label :fname %><br />
+      <%= f.label :First_Name %>
       <%= f.text_field :fname %>
     </p>
     <p>
-      <%= f.label :lname %><br />
+      <%= f.label :Last_Name %>
       <%= f.text_field :lname %>
     </p>
     <p>
-      <%= f.label :email %><br />
+      <%= f.label :Email %>
       <%= f.text_field :email %>
     </p>
     <p>
-      <%= f.label :username %><br />
+      <%= f.label :Username %>
       <%= f.text_field :username %>
     </p>
     <p>
-      <%= f.label :password %><br />
+      <%= f.label :Password %>
       <%= f.password_field :password %>
     </p>
     <p>
-      <%= f.label :password_confirmation %><br />
+      <%= f.label :Password_confirmation %>
       <%= f.password_field :password_confirmation %>
     </p>
     <p>
-      <%= f.label :role %><br />
+      <%= f.label :role %>
       <%= f.text_field :role %>
     </p>
     <p class="button"><%= f.submit %></p>
 <% end %>
+</div>

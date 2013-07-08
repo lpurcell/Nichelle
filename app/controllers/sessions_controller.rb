@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    render :layout => 'application_login'
+
   end
 
   def create
