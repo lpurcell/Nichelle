@@ -27,8 +27,8 @@
 
 }
 #navigation li a:hover {
-    background:#97a662;
-    color:#dd5979;
+    background:#8a8a8a;
+    color:#fffff9;
 }
 
 #navigation > li.selected  > a {
