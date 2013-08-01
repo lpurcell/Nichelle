@@ -16,6 +16,8 @@
 #navigation li a {
     /*background:#e3e0ce; */
     color:#626655;
+    font-family:'caviar_dreamsregular', 'arial';
+    font-size:20px;
     font-weight:bold;
     display:block; /*Making sure a element covers the whole li area*/
     padding:8px 7px 8px 7px;
@@ -32,8 +34,8 @@
 }
 
 #navigation > li.selected  > a {
-    background-color:#acbd70;
-    color:#dd5979;
+    background-color:#8a8a8a;
+    color:#fffff9;
 }
 /*sub menu style */
 #navigation li div div {
@@ -63,10 +65,10 @@
     padding:8px 7px 13px 7px;
     margin-top:3px;
     color:#fff;
-    background:#acbd70;
+    background:#8a8a8a;
     text-decoration:none;
     }
 
 #navigation ul a:hover {
-    color:#dd5979;
+    background: #737373;
 }
